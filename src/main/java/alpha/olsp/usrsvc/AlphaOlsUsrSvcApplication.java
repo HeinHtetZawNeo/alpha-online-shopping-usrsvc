@@ -10,7 +10,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class AlphaOlsUsrSvcApplication {
+public class  AlphaOlsUsrSvcApplication {
 
     @Autowired
     StateRepository stateRepository;

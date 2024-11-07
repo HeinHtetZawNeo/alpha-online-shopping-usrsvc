@@ -1,6 +1,10 @@
 package alpha.olsp.usrsvc.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.Entity;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +15,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "User")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public abstract class User {
 
     @Id
     private String userID = UUID.randomUUID().toString();
@@ -30,21 +34,16 @@ public class User {
 
     private String lastName;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    private Address address;
-
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    public User(String email, String password, String firstName, String lastName, Address address) {
+    public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
     }
 }
