@@ -31,4 +31,9 @@ public class SellerServiceImpl implements SellerService {
 
         return Optional.of(sellerRepository.save(seller));
     }
+
+    @Override
+    public Optional<Seller> findSellerByEmail(String email) {
+        return sellerRepository.findByEmail(email);
+    }
 }

@@ -5,4 +5,5 @@ import java.util.Optional;
 
 public interface CustomerService {
     public Optional<Customer> registerCustomer(Customer customer);
+    public Optional<Customer> findCustomerByEmail(String email);
 }

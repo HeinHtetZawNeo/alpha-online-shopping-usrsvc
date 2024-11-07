@@ -5,4 +5,5 @@ import java.util.Optional;
 
 public interface AdminService {
     Optional<Admin> registerAdmin(Admin user);
+    Optional<Admin> findAdminByEmail(String email);
 }

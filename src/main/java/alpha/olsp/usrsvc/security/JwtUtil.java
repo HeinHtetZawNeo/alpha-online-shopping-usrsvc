@@ -15,6 +15,8 @@ public class JwtUtil {
 
     // Generate a secure key for HS256
     private final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+    // Ensure the same key is used for both generating and verifying tokens
+    //private final SecretKey SECRET_KEY = Keys.hmacShaKeyFor("apsd-online-shopping".getBytes());
 
     /**
      * Generates a JWT token with the username and role as claims.
@@ -85,7 +87,7 @@ public class JwtUtil {
      * @param token The JWT token.
      * @return The claims in the token.
      */
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token).getBody();
     }
 

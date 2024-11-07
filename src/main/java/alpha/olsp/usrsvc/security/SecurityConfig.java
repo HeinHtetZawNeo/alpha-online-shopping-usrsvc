@@ -47,6 +47,9 @@ public class SecurityConfig {
                                 "/api/v1/s/register",
                                 "/api/v1/a/register",
                                 "/api/v1/auth/login").permitAll()
+                        .requestMatchers("api/v1/a/**").hasRole("Admin")
+                        .requestMatchers("api/v1/s/**").hasRole("Seller")
+                        .requestMatchers("api/v1/c/**").hasRole("Customer")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
