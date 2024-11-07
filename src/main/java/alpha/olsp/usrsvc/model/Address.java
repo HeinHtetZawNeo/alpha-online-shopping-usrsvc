@@ -1,17 +1,9 @@
 package alpha.olsp.usrsvc.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 public class Address {
 
     @Id
@@ -35,4 +27,8 @@ public class Address {
         this.state = state;
         this.postalCode = postalCode;
     }
+
+    public Address() {
+    }
+
 }

@@ -1,8 +1,5 @@
 package alpha.olsp.usrsvc.security;
 
-import alpha.olsp.usrsvc.repository.AdminRepository;
-import alpha.olsp.usrsvc.repository.CustomerRepository;
-import alpha.olsp.usrsvc.repository.SellerRepository;
 import alpha.olsp.usrsvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,15 +10,6 @@ import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private SellerRepository sellerRepository;
-
-    @Autowired
-    private AdminRepository adminRepository;
 
     @Autowired
     private UserService userService;
