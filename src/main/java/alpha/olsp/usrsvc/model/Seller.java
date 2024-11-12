@@ -9,7 +9,7 @@ import jakarta.persistence.ForeignKey;
 @Entity
 public class Seller extends User{
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_SELLER_ADDRESS"))
+    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_ADDRESS"))
     private Address address;
 
     public Seller(String email, String password, String firstName, String lastName) {

@@ -43,13 +43,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authz -> authz
                         .requestMatchers(
-                                "/api/v1/c/register",
-                                "/api/v1/s/register",
-                                "/api/v1/a/register",
-                                "/api/v1/auth/login").permitAll()
-                        .requestMatchers("api/v1/a/**").hasRole("Admin")
-                        .requestMatchers("api/v1/s/**").hasRole("Seller")
-                        .requestMatchers("api/v1/c/**").hasRole("Customer")
+                                "/v1/c/register",
+                                "/v1/s/register",
+                                "/v1/a/register",
+                                "/v1/auth/login").permitAll()
+                        .requestMatchers("v1/a/**").hasRole("Admin")
+                        .requestMatchers("v1/s/**").hasRole("Seller")
+                        .requestMatchers("v1/c/**").hasRole("Customer")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

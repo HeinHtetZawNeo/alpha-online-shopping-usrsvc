@@ -8,6 +8,10 @@ import jakarta.persistence.ForeignKey;
 
 @Entity
 public class Admin extends User{
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_ADDRESS"))
+    private Address address;
+
     public Admin() {
         super();
     }
@@ -15,8 +19,4 @@ public class Admin extends User{
     public Admin(String email, String password, String firstName, String lastName) {
         super(email, password, firstName, lastName);
     }
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_ADMIN_ADDRESS"))
-    private Address address;
 }

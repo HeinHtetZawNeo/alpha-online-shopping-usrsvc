@@ -2,7 +2,6 @@ package alpha.olsp.usrsvc.controller;
 
 import alpha.olsp.usrsvc.exception.InvalidInputException;
 import alpha.olsp.usrsvc.exception.UserNotFoundException;
-import alpha.olsp.usrsvc.model.Customer;
 import alpha.olsp.usrsvc.model.Seller;
 import alpha.olsp.usrsvc.security.JwtUtil;
 import alpha.olsp.usrsvc.service.SellerService;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/s")
+@RequestMapping("/v1/s")
 public class SellerController {
     @Autowired
     private SellerService sellerService;
@@ -21,8 +20,8 @@ public class SellerController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/register")
-    public ResponseEntity<Seller> registerSeller(@RequestBody Seller user) {
-        Optional<Seller> registeredSeller = sellerService.registerSeller(user);
+    public ResponseEntity<Seller> registerSeller(@RequestBody Seller seller) {
+        Optional<Seller> registeredSeller = sellerService.registerSeller(seller);
         if (registeredSeller.isPresent())
             return ResponseEntity.ok(registeredSeller.get());
         else

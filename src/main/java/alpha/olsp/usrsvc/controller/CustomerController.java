@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/c")
+@RequestMapping("/v1/c")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;

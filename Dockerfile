@@ -10,7 +10,7 @@ WORKDIR /app
 COPY target/user-service.jar user-service.jar
 
 # Expose the port that the service runs on
-EXPOSE 8081
+EXPOSE 8082
 
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "user-service.jar"]

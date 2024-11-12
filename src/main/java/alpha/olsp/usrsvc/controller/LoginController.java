@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/v1/auth")
 public class LoginController {
 
     @Autowired
