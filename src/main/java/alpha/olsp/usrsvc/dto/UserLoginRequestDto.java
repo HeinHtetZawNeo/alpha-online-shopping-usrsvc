@@ -1,6 +1,6 @@
 package alpha.olsp.usrsvc.dto;
 
-public class UserLoginRequest {
+public class UserLoginRequestDto {
     private String email;
     private String password;
 

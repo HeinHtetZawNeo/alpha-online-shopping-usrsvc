@@ -1,5 +1,6 @@
 package alpha.olsp.usrsvc.service.impl;
 
+import alpha.olsp.usrsvc.controller.AdminController;
 import alpha.olsp.usrsvc.model.Admin;
 import alpha.olsp.usrsvc.model.Customer;
 import alpha.olsp.usrsvc.model.Seller;
@@ -8,23 +9,30 @@ import alpha.olsp.usrsvc.repository.AdminRepository;
 import alpha.olsp.usrsvc.repository.CustomerRepository;
 import alpha.olsp.usrsvc.repository.SellerRepository;
 import alpha.olsp.usrsvc.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
-    @Autowired
-    private SellerRepository sellerRepository;
-    @Autowired
-    private AdminRepository adminRepository;
+    private final CustomerRepository customerRepository;
+    private final SellerRepository sellerRepository;
+    private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
+
+
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
     public Optional<User> findUserByEmail(String email) {
-        System.out.println("Inside findUserByEmail");
         Optional<Customer> customerOptional = customerRepository.findByEmail(email);
         if (customerOptional.isPresent()) {
             return Optional.of(customerOptional.get());
@@ -37,6 +45,15 @@ public class UserServiceImpl implements UserService {
         if (adminOptional.isPresent()) {
             return Optional.of(adminOptional.get());
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<User> findUserByEmailAndPassword(String email, String password) {
+        logger.info("findUserByEmailAndPassword");
+        Optional<User> userOptional = findUserByEmail(email);
+        if(userOptional.isPresent() && passwordEncoder.matches(password,userOptional.get().getPassword()))
+                return userOptional;
         return Optional.empty();
     }
 

@@ -3,7 +3,7 @@ package alpha.olsp.usrsvc.controller;
 import alpha.olsp.usrsvc.exception.InvalidInputException;
 import alpha.olsp.usrsvc.exception.UserNotFoundException;
 import alpha.olsp.usrsvc.model.Seller;
-import alpha.olsp.usrsvc.security.JwtUtil;
+//import alpha.olsp.usrsvc.security.JwtUtil;
 import alpha.olsp.usrsvc.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +16,8 @@ import java.util.Optional;
 public class SellerController {
     @Autowired
     private SellerService sellerService;
-    @Autowired
-    private JwtUtil jwtUtil;
+//    @Autowired
+//    private JwtUtil jwtUtil;
 
     @PostMapping("/register")
     public ResponseEntity<Seller> registerSeller(@RequestBody Seller seller) {
@@ -28,19 +28,19 @@ public class SellerController {
             throw new InvalidInputException("Registration failed");
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<Seller> getProfile(@RequestHeader("Authorization") String authorizationHeader) {
-        // Extract token from the header (remove 'Bearer ' prefix)
-        String token = authorizationHeader.substring(7);
-
-        // Extract email from the token
-        String email = jwtUtil.extractUsername(token);
-
-        Optional<Seller> seller = sellerService.findSellerByEmail(email);
-        if(seller.isPresent()) {
-            return ResponseEntity.ok(seller.get());
-        }else {
-            throw new UserNotFoundException("Invalid User");
-        }
-    }
+//    @GetMapping("/me")
+//    public ResponseEntity<Seller> getProfile(@RequestHeader("Authorization") String authorizationHeader) {
+//        // Extract token from the header (remove 'Bearer ' prefix)
+//        String token = authorizationHeader.substring(7);
+//
+//        // Extract email from the token
+//        String email = jwtUtil.extractUsername(token);
+//
+//        Optional<Seller> seller = sellerService.findSellerByEmail(email);
+//        if(seller.isPresent()) {
+//            return ResponseEntity.ok(seller.get());
+//        }else {
+//            throw new UserNotFoundException("Invalid User");
+//        }
+//    }
 }

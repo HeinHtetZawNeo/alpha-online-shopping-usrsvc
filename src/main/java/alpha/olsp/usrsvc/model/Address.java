@@ -1,9 +1,18 @@
 package alpha.olsp.usrsvc.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.UUID;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Address {
 
     @Id
@@ -20,15 +29,5 @@ public class Address {
 
     private String postalCode;
 
-    public Address(String addressLine1, String addressLine2, String city, State state, String postalCode) {
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.state = state;
-        this.postalCode = postalCode;
-    }
-
-    public Address() {
-    }
 
 }

@@ -5,21 +5,18 @@ import alpha.olsp.usrsvc.model.Customer;
 import alpha.olsp.usrsvc.repository.CustomerRepository;
 import alpha.olsp.usrsvc.service.CustomerService;
 import alpha.olsp.usrsvc.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
-    @Autowired
-    private CustomerRepository customerRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserService userService;
+    private final CustomerRepository customerRepository;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Optional<Customer> registerCustomer(Customer customer) {

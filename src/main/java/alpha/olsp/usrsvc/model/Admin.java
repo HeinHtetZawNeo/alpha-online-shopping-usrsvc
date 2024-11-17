@@ -1,22 +1,31 @@
 package alpha.olsp.usrsvc.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.ForeignKey;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Admin extends User{
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_ADDRESS"))
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_ADMIN_ADDRESS"))
+    @JsonProperty("address")
     private Address address;
 
-    public Admin() {
-        super();
-    }
-
-    public Admin(String email, String password, String firstName, String lastName) {
-        super(email, password, firstName, lastName);
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "address=" + address +
+                "} " + super.toString();
     }
 }
