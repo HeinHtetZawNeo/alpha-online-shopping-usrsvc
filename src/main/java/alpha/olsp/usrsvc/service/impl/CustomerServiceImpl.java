@@ -8,6 +8,7 @@ import alpha.olsp.usrsvc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service
@@ -20,12 +21,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Optional<Customer> registerCustomer(Customer customer) {
-        if(userService.findUserByEmail(customer.getEmail()).isPresent()) {
+        if (userService.findUserByEmail(customer.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
-        //encode the password
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
-
         return Optional.of(customerRepository.save(customer));
     }
 

@@ -2,6 +2,7 @@ package alpha.olsp.usrsvc.service;
 
 import alpha.olsp.usrsvc.model.User;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 @Service

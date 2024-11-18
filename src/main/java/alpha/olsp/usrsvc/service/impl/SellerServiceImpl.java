@@ -6,7 +6,6 @@ import alpha.olsp.usrsvc.repository.SellerRepository;
 import alpha.olsp.usrsvc.service.SellerService;
 import alpha.olsp.usrsvc.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +22,10 @@ public class SellerServiceImpl implements SellerService {
     @Override
     public Optional<Seller> registerSeller(Seller seller) {
         System.out.println("Inside register seller");
-        if(userService.findUserByEmail(seller.getEmail()).isPresent()) {
+        if (userService.findUserByEmail(seller.getEmail()).isPresent()) {
             throw new EmailAlreadyExistsException("Email already exists");
         }
-
-        //encode the password
         seller.setPassword(passwordEncoder.encode(seller.getPassword()));
-
         return Optional.of(sellerRepository.save(seller));
     }
 

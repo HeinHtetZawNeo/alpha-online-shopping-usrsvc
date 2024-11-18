@@ -1,6 +1,6 @@
 package alpha.olsp.usrsvc.exception;
 
-public class UserNotFoundException  extends RuntimeException{
+public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String message) {
         super(message);
     }

@@ -2,17 +2,13 @@ package alpha.olsp.usrsvc.dto;
 
 import lombok.Builder;
 
-import java.time.LocalDateTime;
-
 @Builder
-public record UserLoginResponseDto(
-        String userId,
+public record AdminRegisterResponesDto(
+        String userID,
         String email,
         String firstName,
         String lastName,
-        String role,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt,
+        AddressDto address,
         Boolean isAccountNonExpired,
         Boolean isAccountNonLocked,
         Boolean isCredentialsNonExpired,
