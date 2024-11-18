@@ -8,6 +8,7 @@ import alpha.olsp.usrsvc.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,7 +28,7 @@ public class AdminController {
     public ResponseEntity<AdminRegisterResponesDto> registerAdmin(@RequestBody Admin admin) {
         Optional<Admin> registeredAdmin = adminService.registerAdmin(admin);
         if (registeredAdmin.isPresent()) {
-            return ResponseEntity.ok(UserMapper.adminToAdminRegisterResponesDto(registeredAdmin.get()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.adminToAdminRegisterResponesDto(registeredAdmin.get()));
         } else {
             throw new InvalidInputException("Registration failed");
         }

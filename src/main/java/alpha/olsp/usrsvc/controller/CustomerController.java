@@ -6,6 +6,7 @@ import alpha.olsp.usrsvc.mapper.UserMapper;
 import alpha.olsp.usrsvc.model.Customer;
 import alpha.olsp.usrsvc.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class CustomerController {
 
         Optional<Customer> registeredCustomer = customerService.registerCustomer(customer);
         if (registeredCustomer.isPresent())
-            return ResponseEntity.ok(UserMapper.customerToCustomerRegisterResponesDto(registeredCustomer.get()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.customerToCustomerRegisterResponesDto(registeredCustomer.get()));
         else
             throw new InvalidInputException("Registration failed");
     }

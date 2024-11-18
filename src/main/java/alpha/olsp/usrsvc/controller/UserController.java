@@ -3,6 +3,7 @@ package alpha.olsp.usrsvc.controller;
 import alpha.olsp.usrsvc.dto.UserLoginRequestDto;
 import alpha.olsp.usrsvc.dto.UserLoginResponseDto;
 import alpha.olsp.usrsvc.exception.InvalidCredentialsException;
+import alpha.olsp.usrsvc.mapper.UserMapper;
 import alpha.olsp.usrsvc.model.User;
 import alpha.olsp.usrsvc.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -31,19 +32,6 @@ public class UserController {
 
         user.orElseThrow(() -> new InvalidCredentialsException("Invalid email or password"));
 
-        return ResponseEntity.ok(
-                UserLoginResponseDto.builder()
-                        .userId(user.get().getUserID())
-                        .email(user.get().getEmail())
-                        .role(user.get().getClass().getSimpleName().toUpperCase())
-                        .firstName(user.get().getFirstName())
-                        .lastName(user.get().getLastName())
-                        .isAccountNonExpired(user.get().getIsAccountNonExpired())
-                        .isAccountNonLocked(user.get().getIsAccountNonLocked())
-                        .isCredentialsNonExpired(user.get().getIsCredentialsNonExpired())
-                        .isEnabled(user.get().getIsEnabled())
-                        .createdAt(user.get().getCreatedAt())
-                        .updatedAt(user.get().getUpdatedAt())
-                        .build());
+        return ResponseEntity.ok(UserMapper.userToUserLoginResponseDto(user.get()));
     }
 }

@@ -6,6 +6,7 @@ import alpha.olsp.usrsvc.mapper.UserMapper;
 import alpha.olsp.usrsvc.model.Seller;
 import alpha.olsp.usrsvc.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +25,7 @@ public class SellerController {
     public ResponseEntity<SellerRegisterResponesDto> registerSeller(@RequestBody Seller seller) {
         Optional<Seller> registeredSeller = sellerService.registerSeller(seller);
         if (registeredSeller.isPresent())
-            return ResponseEntity.ok(UserMapper.sellerToSellerRegisterResponesDto(registeredSeller.get()));
+            return ResponseEntity.status(HttpStatus.CREATED).body(UserMapper.sellerToSellerRegisterResponesDto(registeredSeller.get()));
         else
             throw new InvalidInputException("Registration failed");
     }

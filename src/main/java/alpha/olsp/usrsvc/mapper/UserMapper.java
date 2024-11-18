@@ -4,6 +4,7 @@ import alpha.olsp.usrsvc.dto.*;
 import alpha.olsp.usrsvc.model.Admin;
 import alpha.olsp.usrsvc.model.Customer;
 import alpha.olsp.usrsvc.model.Seller;
+import alpha.olsp.usrsvc.model.User;
 
 public class UserMapper {
     public static AdminRegisterResponesDto adminToAdminRegisterResponesDto(Admin admin) {
@@ -75,6 +76,22 @@ public class UserMapper {
                 .isAccountNonLocked(customer.getIsAccountNonLocked())
                 .isCredentialsNonExpired(customer.getIsCredentialsNonExpired())
                 .isEnabled(customer.getIsEnabled())
+                .build();
+    }
+
+    public static UserLoginResponseDto userToUserLoginResponseDto(User user) {
+        return UserLoginResponseDto.builder()
+                .userId(user.getUserID())
+                .email(user.getEmail())
+                .role(user.getClass().getSimpleName().toUpperCase())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .isAccountNonExpired(user.getIsAccountNonExpired())
+                .isAccountNonLocked(user.getIsAccountNonLocked())
+                .isCredentialsNonExpired(user.getIsCredentialsNonExpired())
+                .isEnabled(user.getIsEnabled())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .build();
     }
 }
